@@ -1,0 +1,135 @@
+#include <iostream>
+#include <windows.h>
+
+using namespace std;
+
+const int n = 5;
+      int tab[n];
+      int head = 0;
+      int tail = 0;
+      int howm = 0;
+      int choice;
+
+void show()
+{
+    int index = 0;
+
+    for(int i = 0; i < howm; i++)
+    {
+        if(howm == 0)
+        {
+            cout << "It's empty! Feel free to fill it in..." <<endl;
+            Sleep(1000);
+        }
+        else
+        {
+            index = head+i;
+            if(index >= n)    index = index - n;
+
+            cout << tab[index];
+        }
+    }
+    Sleep(1000);
+    cout <<endl<<endl;
+
+}
+
+void push()
+{
+    int newEl;
+
+    if(howm == n)   cout << "It's full! Feel free to pop sth out..." <<endl;
+    else
+    {
+        cout << "What number do you want to add?:";
+        cin  >> newEl;
+
+        tab[tail] = newEl;
+        tail = (tail +1) %n;
+        howm++;
+        cout <<endl;
+    }
+}
+
+void pop()
+{
+    if(howm == 0)   cout << "It's empty! Feel free to fill it in..." <<endl;
+    else
+    {
+        head = (head +1) %n;
+        howm--;
+    }
+}
+
+void size()
+{
+    cout << "It has " << howm << " elements." <<endl;
+}
+
+void empty()
+{
+    if(howm == 0)
+    {
+        cout << "It's empty. Feel free to fill it in..." <<endl;
+        Sleep(1000);
+    }
+    else
+    {
+        cout << "It's not empty. Feel free to review..." <<endl;
+        Sleep(1000);
+    }
+}
+
+void choose(int choice)
+{
+    switch(choice)
+    {
+        case 1:
+            show();
+            break;
+        case 2:
+            push();
+            break;
+        case 3:
+            pop();
+            break;
+        case 4:
+            size();
+            break;
+        case 5:
+            empty();
+            break;
+        default:
+            cout << "Wrong input...";
+            Sleep(1000);
+    }
+}
+
+int main()
+{
+    do
+    {
+
+    cout << "head: "             << head <<endl;
+    cout << "tail: "             << tail <<endl;
+    cout << "How many?: "        << howm <<endl<<endl;
+
+    cout << "1  Show"           <<endl;
+    cout << "2  Push"           <<endl;
+    cout << "3  Pop"            <<endl;
+    cout << "4  Size"           <<endl;
+    cout << "5  Empty"          <<endl;
+    cout << "6  Escape"         <<endl;
+    cout << "Choose what to do:"<<endl;
+
+    cin  >> choice;
+
+    cout <<endl;
+
+    choose(choice);
+
+    } while(choice != 6);
+
+
+    return 0;
+}
